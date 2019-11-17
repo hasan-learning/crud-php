@@ -3,7 +3,20 @@ function __autoload($class)
 {
   require_once "classes/$class.php";
 }
+if (isset($_POST['submit'])) {
+  $name = $_POST['name'];
+  $qty = $_POST['qty'];
 
+  $fields = [
+    'name' => $name,
+    'qty' => $qty
+  ];
+
+  $employee = new Employee();
+
+
+  $employee->insert($fields);
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -27,7 +40,7 @@ function __autoload($class)
           <div class="card">
             <div class="card-header">Enter Medicine Details</div>
             <div class="card-body">
-              <form action="action.php" method="post">
+              <form action="" method="post">
               <table class="table table-hover">
                 <tr>
                   <td>Medicine Name:</td>
@@ -38,7 +51,7 @@ function __autoload($class)
                   <td><input type="text" class="form-control" name="qty" placeholder="medicine quantity"></td>
                 </tr>
                 <tr>
-                  <td colspan="2"><input type="submit" class="btn btn-success" value="save"></td>
+                  <td colspan="2"><button type="submit" name="submit" class="btn btn-success">Save</button></td>
                 </tr>
               </table>
                 </form>

@@ -3,20 +3,6 @@ function __autoload($class)
 {
   require_once "classes/$class.php";
 }
-if (isset($_POST['submit'])) {
-  $name = $_POST['name'];
-  $qty = $_POST['qty'];
-
-  $fields = [
-    'name' => $name,
-    'qty' => $qty
-  ];
-
-  $employee = new Employee();
-
-
-  $employee->insert($fields);
-}
 ?>
 <!doctype html>
 <html lang="en">
@@ -40,11 +26,11 @@ if (isset($_POST['submit'])) {
           <div class="card">
             <div class="card-header">Enter Medicine Details</div>
             <div class="card-body">
-              <form action="" method="post">
+              <form action="action.php" method="post">
               <table class="table table-hover">
                 <tr>
                   <td>Medicine Name:</td>
-                  <td><input type="text" class="form-control" name="name" placeholder="medicine name"></td>
+                  <td><input type="text" class="form-control" name="name" value="" placeholder="medicine name"></td>
                 </tr>
                 <tr>
                   <td> Quantity:</td>
@@ -87,8 +73,8 @@ if (isset($_POST['submit'])) {
               <td><?= $row['name'] ?></td>
               <td><?= $row['qty'] ?></td>
               <th>
-                <a href="#" class="btn btn-info btn-sm">Edit</a>
-                <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                <a href="?edit=<?= $row['id'] ?>" class="btn btn-info btn-sm">Edit</a>
+                <a href="?delete=<?= $row['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
               </th>
               </tr>
             <?php } ?>

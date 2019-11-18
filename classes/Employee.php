@@ -31,11 +31,22 @@ class Employee extends Database
 
     $stmtExec = $stmt->execute();
 
-    if($stmtExec==true){
+    if ($stmtExec == true) {
       echo '<h2>Successfully inserted!</h2>';
-    }else{
+    } else {
       echo '<h2>Failed inserted!</h2>';
     }
   }
+
+  public function selectOne($id)
+  {
+    $sql = "select * from employees where id= :id";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->bindValue(":id", $id);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
 
 }
